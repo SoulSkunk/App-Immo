@@ -1,14 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-import "../Formulaires.css";
+import toastUtils from "../assets/utils";
 
 function Connection() {
+  let navigate = useNavigate();
   // Creation de la variable d'etat qui va contenir la data recupéré du formulaire
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  //Ajout du token dans une variable d'etat par défaut vaut null
+  const [token, setToken] = useState(null);
 
   //récupère les données rentrées dans le form
   const handleChange = (e) => {
@@ -20,11 +25,39 @@ function Connection() {
   };
 
   //Function d'envoie de la data récup du form
-  const handleSubmit = (e) => {
+  //Function de connection
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Mets ici la logique pour gérer l'envoi du formu
-    console.log(formData); // {email: 'kylian.broccolichi@mediaschool.me', password: 'sd'}
-  };
+    //constante qui contient la methods et on dit que c'est fromData qu'on attend mais en stringify json pour etre lu
+    const requestOption = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+    let response = await fetch(
+      "https://apihackaton1.osc-fr1.scalingo.io/users/login",
+      requestOption
+    );
+
+    let data = await response.json();
+    console.log("Vous êtes connecté ");
+    toastUtils("success", "Vous êtes connecté");
+    console.log(data);
+    localStorage.setItem("token", data.token);
+    setToken(data.token);
+    console.log(formData); // {username: 'qsd', email: 'kylian.broccolichi@mediaschool.me', confirmEmail: 'kylian.broccolichi@mediaschool.me', password: 'sd'}
+    navigate("/");
+  }
+
+  //Function de deconnection
+  function handleDeco() {
+    setToken(null); //en gros supprime le token
+    localStorage.removeItem("token");
+    console.log("Vous êtes déconnecté " + token);
+    toastUtils("error", "Vous vous êtes déconnecté");
+  }
 
   return (
     <>
@@ -57,6 +90,7 @@ function Connection() {
           </div>
           <button type="submit">Se connecter</button>
         </form>
+        {token && <button onClick={handleDeco}>Se déconnecter</button>}
       </div>
     </>
   );

@@ -1,68 +1,85 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
-import "../Formulaires.css";
+import "../style/cardAnnonce.css";
 
 function User() {
-  // Creation de la variable d'etat qui va contenir la data recupéré du formulaire
+  // Creation de la variable d'etat qui va contenir
 
-  const [formData, setFormData] = useState({
-    location: "",
-    phoneNumber: "",
-  });
+  const [userData, setUserData] = useState({});
+  const [propertiesData, setPropertiesData] = useState({});
 
-  //récupère les données rentrées dans le form
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  //Function de recup des informations du profil (tapé dans inscription)
+  async function functionAsync() {
+    const requestOption = {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"), //vu qu'on a stocké le token dans le localStorage on peut le récupérer pour l'utiliser ici
+      },
+    };
+    let response = await fetch(
+      "https://apihackaton1.osc-fr1.scalingo.io/users/profile",
+      requestOption
+    );
 
-  //Function d'envoie de la data récup du form
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setInputValue(value);
+    let data = await response.json();
+    console.log("Profil validé ");
+    setUserData(data);
+    console.log(data);
+    // setInputValue(value);
     // Mets ici la logique pour gérer l'envoi du formu
-    console.log(formData); // {email: 'kylian.broccolichi@mediaschool.me', password: 'sd'}
-  };
+  }
+
+  //Function async pour afficher les propriétés de l'utilisateur
+  async function userFunction() {
+    const requesttOption = {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"), //vu qu'on a stocké le token dans le localStorage on peut le récupérer pour l'utiliser ici
+      },
+    };
+    let response = await fetch(
+      "https://apihackaton1.osc-fr1.scalingo.io/get-my-properties",
+      requesttOption
+    );
+
+    let data = await response.json();
+    setPropertiesData(data);
+    console.log(data);
+  }
 
   //Input des villes
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+    functionAsync();
+    userFunction();
+  }, []);
 
   return (
     <>
       <Header />
-      <div className="form-container">
-        {/* Au déclenchement du boutton S'inscrire CTA ca déclenche la function handleSumbit */}
-        <form onSubmit={handleSubmit}>
-          <h2>Votre profil</h2>
-          <div className="form-group">
-            <label htmlFor="location">Indiquez votre ville</label>
-            <select name="location" onChange={handleChange}>
-              <option value="lyon">Lyon</option>
-              <option value="nice">Nice</option>
-              <option value="cannes">Cannes</option>
-              <option value="monaco">Monaco</option>
-              <option value="antibes">Antibes</option>
-              <option value="paris">Paris</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="phoneNumber">Numéro de téléphone</label>
-            <input
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit">Validé</button>
-        </form>
+      <div className="infoPersoContainer">
+        <h2>Informations Personnelles</h2>
+        <span>Votre pseudo : {userData.username}</span>
+        <br></br>
+        <span>Votre email : {userData.email}</span>
+
+        {Array.isArray(propertiesData) ? (
+          <ul>
+            {propertiesData.map((property) => (
+              <li key={property.id}>
+                {/* Remplacez les propriétés ci-dessous par celles que vous avez dans votre API */}
+                <p>Nom de la propriété : {property.title}</p>
+                <p>Description : {property.description}</p>
+                <p>Prix : {property.price}</p>
+                <p>Localisaton : {property.location}</p>
+                {/* Ajoutez d'autres propriétés ici */}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Aucune propriété à afficher.</p>
+        )}
       </div>
     </>
   );

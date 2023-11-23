@@ -1,16 +1,18 @@
 import { useState } from "react";
+
 import Header from "./Header";
-import "../Formulaires.css";
+
+import toastUtils from "../assets/utils";
 
 function Annonce() {
   // Creation de la variable d'etat qui va contenir la data recupéré du formulaire
 
   const [formData, setFormData] = useState({
     title: "",
-    location: "",
-    // pictures: "",
     description: "",
     price: "",
+    location: "",
+    // images: "",
   });
 
   //récupère les données rentrées dans le form
@@ -22,12 +24,28 @@ function Annonce() {
     }));
   };
 
-  //Function d'envoie de la data récup du form
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Mets ici la logique pour gérer l'envoi du formu
-    console.log(formData); // {email: 'kylian.broccolichi@mediaschool.me', password: 'sd'}
-  };
+    //constante qui contient la methods et on dit que c'est fromData qu'on attend mais en stringify json pour etre lu
+    const requestOption = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Baerer " + localStorage.getItem("token"),
+      },
+      body: JSON.stringify(formData),
+    };
+    let response = await fetch(
+      "https://apihackaton1.osc-fr1.scalingo.io/create-properties",
+      requestOption
+    );
+
+    let data = await response.json();
+    console.log("Annonce créée ");
+    toastUtils("success", "Annonce créée !");
+    console.log(data);
+    console.log(formData);
+  }
 
   return (
     <>
@@ -81,7 +99,7 @@ function Annonce() {
               required
             />
           </div>
-          <button type="submit">Se connecter</button>
+          <button type="submit">Publier </button>
         </form>
       </div>
     </>

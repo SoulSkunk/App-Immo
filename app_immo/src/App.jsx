@@ -1,6 +1,8 @@
 //Import des frameworks
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 import { Menu } from "antd";
 
@@ -24,6 +26,7 @@ const App = () => {
           <Route path="/user" element={<User />} />
           <Route path="/annonce" element={<Annonce />} />
         </Routes>
+        <ToastContainer position="top-right" />
       </Router>
     </>
   );

@@ -1,8 +1,10 @@
 import { useState } from "react";
-import Header from "./Header";
-import "../Formulaires.css";
+import { useNavigate } from "react-router-dom";
+import toastUtils from "../assets/utils";
+import { Link } from "react-router-dom";
 
 function Inscription() {
+  let navigate = useNavigate();
   // Creation de la variable d'etat qui va contenir la data recupéré du formulaire
 
   const [formData, setFormData] = useState({
@@ -21,16 +23,33 @@ function Inscription() {
     }));
   };
 
-  //Function d'envoie de la data récup du form
-  const handleSubmit = (e) => {
+  //Function d'envoie de la data récupérée du form
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Mets ici la logique pour gérer l'envoi du formu
+    //constante qui contient la methods et on dit que c'est fromData qu'on attend mais en stringify json pour etre lu
+    const requestOption = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+    let response = await fetch(
+      "https://apihackaton1.osc-fr1.scalingo.io/users/register",
+      requestOption
+    );
+
+    let data = await response.json();
+    console.log("Vous êtes bien inscrit ");
+    toastUtils("success", "Vous êtes bien inscrit");
+    console.log(data);
+
     console.log(formData); // {username: 'qsd', email: 'kylian.broccolichi@mediaschool.me', confirmEmail: 'kylian.broccolichi@mediaschool.me', password: 'sd'}
-  };
+    navigate("/connection");
+  }
 
   return (
     <>
-      <Header />
       <div className="form-container">
         {/* Au déclenchement du boutton S'inscrire CTA ca déclenche la function handleSumbit */}
         <form onSubmit={handleSubmit}>
@@ -81,6 +100,12 @@ function Inscription() {
           </div>
           <button type="submit">S'inscrire</button>
         </form>
+        <Link to="/connection">
+          <p>Déjà un compte ? Connectez-vous</p>
+        </Link>
+        <Link to="/">
+          <p>Je le ferai plus tard</p>
+        </Link>
       </div>
     </>
   );
