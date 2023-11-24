@@ -4,10 +4,17 @@
   margin: 0 auto; /* Cette propriété auto pour la marge horizontale permet de centrer la div */
 }
 
+.top_email_deco {
+  display: flex;
+}
+
 .annonces_area {
   list-style-type: none;
-
   width: 100%;
+}
+.annonces_area_home {
+  list-style-type: none;
+  width: 50%;
 }
 
 .box_top_txt {
@@ -58,8 +65,8 @@ span {
 }
 
 .location_style {
-  background-color: yellow;
-  max-width: 10vw;
+  background-color: rgb(255, 166, 0);
+  max-width: 4vw;
   border-radius: 30%;
   text-align: center;
   padding-top: 2%;

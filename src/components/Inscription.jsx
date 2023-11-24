@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toastUtils from "../assets/utils";
 import { Link } from "react-router-dom";
+import "../style/Formulaires.css";
 
 function Inscription() {
   let navigate = useNavigate();

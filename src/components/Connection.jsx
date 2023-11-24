@@ -12,9 +12,6 @@ function Connection() {
     password: "",
   });
 
-  //Ajout du token dans une variable d'etat par défaut vaut null
-  const [token, setToken] = useState(null);
-
   //récupère les données rentrées dans le form
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,17 +43,8 @@ function Connection() {
     toastUtils("success", "Vous êtes connecté");
     console.log(data);
     localStorage.setItem("token", data.token);
-    setToken(data.token);
     console.log(formData); // {username: 'qsd', email: 'kylian.broccolichi@mediaschool.me', confirmEmail: 'kylian.broccolichi@mediaschool.me', password: 'sd'}
     navigate("/");
-  }
-
-  //Function de deconnection
-  function handleDeco() {
-    setToken(null); //en gros supprime le token
-    localStorage.removeItem("token");
-    console.log("Vous êtes déconnecté " + token);
-    toastUtils("error", "Vous vous êtes déconnecté");
   }
 
   return (
@@ -90,7 +78,6 @@ function Connection() {
           </div>
           <button type="submit">Se connecter</button>
         </form>
-        {token && <button onClick={handleDeco}>Se déconnecter</button>}
       </div>
     </>
   );

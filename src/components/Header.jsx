@@ -13,7 +13,7 @@ function Header() {
     <header>
       <div id="in_header">
         <Link to="/">
-          <h1>Happy'Mo</h1>
+          <h1 id="title_header">Happy'Mo</h1>
         </Link>
         <nav>
           <ul>
@@ -29,8 +29,8 @@ function Header() {
                     <Link to="/user">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="40"
-                        height="40"
+                        width="50"
+                        height="50"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="white"

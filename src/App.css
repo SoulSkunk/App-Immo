@@ -22,6 +22,10 @@ header {
   align-items: center;
 }
 
+#title_header {
+  color: rgb(255, 166, 0);
+}
+
 h1 {
   margin: 0;
 }
@@ -48,12 +52,7 @@ nav h1 {
 }
 
 nav h1:hover {
-  color: rgb(183, 0, 255); /* Couleur de survol */
-}
-
-#in_footer {
-  max-width: 1200px;
-  margin: 0 auto;
+  color: rgb(255, 166, 0); /* Couleur de survol */
 }
 
 /* Responsive header */

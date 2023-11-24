@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import "../style/cardAnnonce.css";
+import toastUtils from "../assets/utils";
+import { useNavigate } from "react-router-dom";
 
 function User() {
+  let navigate = useNavigate();
   // Creation de la variable d'etat qui va contenir
 
   const [userData, setUserData] = useState({});
@@ -74,6 +77,13 @@ function User() {
     console.log(id);
   }
 
+  function handleDeco() {
+    localStorage.removeItem("token");
+    toastUtils("error", "Vous vous êtes déconnecté");
+    userFunction(); //recharge la page pour que connexion incsription réaparaissent
+    navigate("/");
+  }
+
   return (
     <>
       <Header />
@@ -81,8 +91,10 @@ function User() {
         <div className="box_top_txt">
           <h2>Informations Personnelles</h2>
           <h3>Bienvenue sur votre espace {userData.username} !</h3>
-
-          <h3>{userData.email}</h3>
+          <div className="top_email_deco">
+            <h3>{userData.email}</h3>
+            <button onClick={handleDeco}>Se déconnecter</button>
+          </div>
         </div>
 
         <div className="title_properties">
@@ -117,7 +129,10 @@ function User() {
                     </span>
                     <br />
                     <div className="location_style">
-                      <span>{property.location}</span>
+                      <span>
+                        {property.location.charAt(0).toUpperCase() +
+                          property.location.slice(1)}
+                      </span>
                     </div>
 
                     <br />
