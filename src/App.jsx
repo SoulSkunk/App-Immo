@@ -9,8 +9,8 @@ import { Menu } from "antd";
 //import fichier css
 import "./App.css";
 //import des components
-import Inscription from "./components/inscription";
-import Connection from "./components/connection";
+import Inscription from "./components/Inscription";
+import Connection from "./components/Connection";
 import User from "./components/User";
 import Home from "./components/Home";
 import Annonce from "./components/Annonce";
