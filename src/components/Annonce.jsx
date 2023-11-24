@@ -6,6 +6,7 @@ import toastUtils from "../assets/utils";
 import { useNavigate } from "react-router-dom";
 
 function Annonce() {
+  let navigate = useNavigate();
   // Creation de la variable d'etat qui va contenir la data recupéré du formulaire
 
   const [formData, setFormData] = useState({

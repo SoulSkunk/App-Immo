@@ -29,6 +29,9 @@ header {
 h1 {
   margin: 0;
 }
+h2 {
+  color: black;
+}
 a {
   text-decoration: none;
 }

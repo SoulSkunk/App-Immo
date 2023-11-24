@@ -4,6 +4,16 @@
   margin: 0 auto; /* Cette propriété auto pour la marge horizontale permet de centrer la div */
 }
 
+.user_titles {
+  color: white;
+}
+
+.btn_deco {
+  margin-left: 30%;
+  padding-top: 1% !important;
+  padding-bottom: 1% !important;
+}
+
 .top_email_deco {
   display: flex;
 }
@@ -42,7 +52,7 @@ img {
 }
 
 span {
-  font-size: 15px;
+  font-size: 1vw;
 }
 
 .infoContainer {

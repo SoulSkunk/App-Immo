@@ -89,16 +89,18 @@ function User() {
       <Header />
       <div className="infoPersoContainer">
         <div className="box_top_txt">
-          <h2>Informations Personnelles</h2>
+          <h2 className="user_titles">Informations Personnelles</h2>
           <h3>Bienvenue sur votre espace {userData.username} !</h3>
           <div className="top_email_deco">
             <h3>{userData.email}</h3>
-            <button onClick={handleDeco}>Se déconnecter</button>
+            <button className="btn_deco" onClick={handleDeco}>
+              Se déconnecter
+            </button>
           </div>
         </div>
 
         <div className="title_properties">
-          <h2>Voici vos propriétés</h2>
+          <h2 className="user_titles">Voici vos propriétés</h2>
         </div>
 
         {Array.isArray(propertiesData) ? (
@@ -142,7 +144,7 @@ function User() {
             ))}
           </ul>
         ) : (
-          <h2>Aucune propriété à afficher.</h2>
+          <h2 className="user_titles">Aucune propriété à afficher.</h2>
         )}
       </div>
     </>

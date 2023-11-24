@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import toastUtils from "../assets/utils";
 import { Link } from "react-router-dom";
 import "../style/Formulaires.css";
+import Header from "./Header";
 
 function Inscription() {
   let navigate = useNavigate();
@@ -51,9 +52,10 @@ function Inscription() {
 
   return (
     <>
+      <Header />
       <div className="form-container">
-        {/* Au déclenchement du boutton S'inscrire CTA ca déclenche la function handleSumbit */}
-        <form onSubmit={handleSubmit}>
+        {/* Au déclenchement du bouton S'inscrire CTA, cela déclenche la fonction handleSubmit */}
+        <form onSubmit={handleSubmit} className="registration-form">
           <h2>Inscription</h2>
           <div className="form-group">
             <label htmlFor="username">Nom d'utilisateur</label>
@@ -61,7 +63,7 @@ function Inscription() {
               type="text"
               id="username"
               name="username"
-              value={formData.username} //Lie le form à la variable
+              value={formData.username}
               onChange={handleChange}
               required
             />
@@ -101,12 +103,10 @@ function Inscription() {
           </div>
           <button type="submit">S'inscrire</button>
         </form>
-        <Link to="/connection">
-          <p>Déjà un compte ? Connectez-vous</p>
-        </Link>
-        <Link to="/">
-          <p>Je le ferai plus tard</p>
-        </Link>
+        <div className="form-links">
+          <Link to="/connection">Déjà un compte ? Connectez-vous</Link>
+          <Link to="/">Je le ferai plus tard</Link>
+        </div>
       </div>
     </>
   );
