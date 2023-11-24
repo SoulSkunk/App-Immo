@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "./Header";
 
 import toastUtils from "../assets/utils";
+import { useNavigate } from "react-router-dom";
 
 function Annonce() {
   // Creation de la variable d'etat qui va contenir la data recupéré du formulaire
@@ -45,6 +46,7 @@ function Annonce() {
     toastUtils("success", "Annonce créée !");
     console.log(data);
     console.log(formData);
+    navigate("/");
   }
 
   return (

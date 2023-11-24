@@ -55,30 +55,79 @@ function User() {
     userFunction();
   }, []);
 
+  async function delete_property(id) {
+    const requesttOption = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    let response = await fetch(
+      "https://apihackaton1.osc-fr1.scalingo.io/delete-properties/" + id,
+      requesttOption
+    );
+
+    let data = await response.json();
+    userFunction();
+    console.log(data);
+    console.log(id);
+  }
+
   return (
     <>
       <Header />
       <div className="infoPersoContainer">
-        <h2>Informations Personnelles</h2>
-        <span>Votre pseudo : {userData.username}</span>
-        <br></br>
-        <span>Votre email : {userData.email}</span>
+        <div className="box_top_txt">
+          <h2>Informations Personnelles</h2>
+          <h3>Bienvenue sur votre espace {userData.username} !</h3>
+
+          <h3>{userData.email}</h3>
+        </div>
+
+        <div className="title_properties">
+          <h2>Voici vos propriétés</h2>
+        </div>
 
         {Array.isArray(propertiesData) ? (
-          <ul>
+          <ul className="annonces_area">
             {propertiesData.map((property) => (
               <li key={property.id}>
-                {/* Remplacez les propriétés ci-dessous par celles que vous avez dans votre API */}
-                <p>Nom de la propriété : {property.title}</p>
-                <p>Description : {property.description}</p>
-                <p>Prix : {property.price}</p>
-                <p>Localisaton : {property.location}</p>
-                {/* Ajoutez d'autres propriétés ici */}
+                {/* div qui contient l'affichage des mes annonces */}
+                <div className="card_properties">
+                  <span
+                    className="croix"
+                    onClick={() => {
+                      delete_property(property.id);
+                    }}
+                  >
+                    X
+                  </span>
+                  <div>
+                    <img
+                      src="https://images.trvl-media.com/lodging/25000000/24110000/24102400/24102382/438ef6d6.jpg?impolicy=resizecrop&rw=500&ra=fit"
+                      alt=""
+                    />
+                  </div>
+                  <div className="infoContainer">
+                    <span className="price_style">{property.price} €</span>
+                    <span className="title_style">{property.title}</span>
+                    <span className="description_style">
+                      {property.description}
+                    </span>
+                    <br />
+                    <div className="location_style">
+                      <span>{property.location}</span>
+                    </div>
+
+                    <br />
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
         ) : (
-          <p>Aucune propriété à afficher.</p>
+          <h2>Aucune propriété à afficher.</h2>
         )}
       </div>
     </>

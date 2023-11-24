@@ -51,16 +51,6 @@ nav h1:hover {
   color: rgb(183, 0, 255); /* Couleur de survol */
 }
 
-/* Footer */
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
 #in_footer {
   max-width: 1200px;
   margin: 0 auto;

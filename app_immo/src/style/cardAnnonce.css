@@ -1,3 +1,78 @@
 .infoPersoContainer {
-  margin: auto 0;
+  width: 80%; /* ajustez la largeur de votre choix */
+  max-width: 600px; /* ajustez la largeur maximale de votre choix */
+  margin: 0 auto; /* Cette propriété auto pour la marge horizontale permet de centrer la div */
+}
+
+.annonces_area {
+  list-style-type: none;
+
+  width: 100%;
+}
+
+.box_top_txt {
+  width: 80%; /* ajustez la largeur de votre choix */
+  max-width: 600px; /* ajustez la largeur maximale de votre choix */
+  margin: 0 auto; /* Cette propriété auto pour la marge horizontale permet de centrer la div */
+  text-align: center;
+  /* background-color: rgb(30, 42, 148); */
+}
+
+img {
+  width: auto;
+  height: 13vw;
+  margin-top: 5%;
+  padding-left: 2vw;
+}
+
+.card_properties {
+  margin-top: 5%;
+  display: flex;
+  gap: 10%;
+  border: 0.5mm solid rgb(95, 95, 95);
+  align-items: center;
+  position: relative;
+}
+
+span {
+  font-size: 15px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 30%; */
+}
+
+.price_style {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.title_style {
+  font-weight: bold;
+}
+
+.description_style {
+  font-size: 12px;
+}
+
+.location_style {
+  background-color: yellow;
+  max-width: 10vw;
+  border-radius: 30%;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.title_properties {
+  display: flex;
+  flex-direction: column;
+}
+
+.croix {
+  position: absolute;
+  top: 1%;
+  left: 97%;
 }

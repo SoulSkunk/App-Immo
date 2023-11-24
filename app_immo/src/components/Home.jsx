@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
-import Footer from "./Footer";
+import "../style/Formulaires.css";
 
 function Home() {
   const [propertiesData, setPropertiesData] = useState({});
@@ -32,6 +32,7 @@ function Home() {
   return (
     <>
       <Header />
+      <div className="infoPersoContainer"></div>
       {Array.isArray(propertiesData) ? (
         <ul>
           {propertiesData.map((property) => (
@@ -40,6 +41,8 @@ function Home() {
               <p>Description : {property.description}</p>
               <p>Prix : {property.price}</p>
               <p>Localisaton : {property.location}</p>
+              <p> {property.email}</p>
+
               {/* Ajoutez d'autres propriétés ici */}
             </li>
           ))}
@@ -47,7 +50,6 @@ function Home() {
       ) : (
         <p>Aucune propriété à afficher.</p>
       )}
-      <Footer />
     </>
   );
 }
